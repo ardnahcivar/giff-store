@@ -1,0 +1,1 @@
+export { default as GiffItem } from './giff-item';
