@@ -7,7 +7,6 @@ export const getParams = (params = {}) => ({
     }
 });
 
-
 export const handleErrors = error => {
     if(axios.isCancel(error)){
         return Promise.reject(new Error('Client closed request'))

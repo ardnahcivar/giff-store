@@ -14,10 +14,17 @@ export const LoadingNextGiffIndicator = styled.div`
     width: 100%;
     padding: 1em;
     justify-content: center;
-    height: 60px;
+    min-height: 20px;
+    height: 200px;
 `;
 
 
 export const Loading = styled(LoadingNextGiffIndicator)`
     padding: 0.5em;
+`;
+
+export const ErrorMessagesStyled = styled.div`
+    display: flex;
+    font-size: 1.5em;
+    color: ${({ error }) => error ? '#f44336':'#9e9e9e'}
 `;

@@ -11,66 +11,41 @@ import {
     GIFF_SEARCH_CLEAR,
     THEME_TOGGLE
 } from './action-types';
-
 import {THEME } from './../constants';
 
 const { LIGHT, DARK } = THEME;
 
 const detfaultState = {
-    giffs:[],
+    giffs: [],
     searchText: '',
     isSearchEnabled: false,
-    selectedTheme: LIGHT
+    selectedTheme: LIGHT,
+    error: false
 }
 
 export const GiphyReducer  = (state = detfaultState, action) => {
-   console.log(action);
 
-   const { payload }  = action;
-    switch(action.type){
+   const { payload, type }  = action;
+
+   switch(type){
         case GIFF_FETCH_REQUESTED:
-            const data = {
-                ...state,
-                loading: true
-            }       
-            return data;
-    
-        case GIFF_FETCH_SUCCESS: {
-            const { giffs } = action;
-            const { data, pagination } = giffs;
-        
-            const d = {
-                ...state,
-                loading: false,
-                giffs: [
-                    ...state.giffs,
-                    ...data
-                ],
-                giffMetaData:{
-                    ...pagination
-                }
-            }
-
-            return d;
-        }
-        
-        case GIFF_FETCH_FAILED: {
-            const data =  {
-                ...state,
-                loading: false,
-                error: true
-            }
-                return data;
-        }
-        
-        case GIFF_FETCH_NEXT_PAGE_REQUEST: {
+        case GIFF_FETCH_NEXT_PAGE_REQUEST: 
             return {
                 ...state,
                 loading: true
             };
-        }
-
-        case GIFF_FETCH_NEXT_PAGE_SUCCESS:{
+        
+        case GIFF_FETCH_FAILED: 
+        case GIFF_FETCH_NEXT_PAGE_FAILED: 
+        case GIFF_SEARCH_FAILED: 
+            return {
+                ...state,
+                loading: false,
+                error:true
+            }
+        
+        case GIFF_FETCH_SUCCESS: 
+        case GIFF_FETCH_NEXT_PAGE_SUCCESS:
             const { giffs } = action;
             const { data, pagination } = giffs;
 
@@ -85,17 +60,9 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                     ...pagination
                 }
             };
-        }
-
-        case GIFF_FETCH_NEXT_PAGE_FAILED: {
-            return {
-                ...state,
-                loading: false,
-                error: true
-            };
-        }
-
-        case GIFF_SEARCH_REQUEST: {
+        
+     
+        case GIFF_SEARCH_REQUEST: 
             const { searchText } = payload;
 
             return {
@@ -104,14 +71,14 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                 searchText,
                 isSearchEnabled: true
             }
-        }
 
-        case GIFF_SEARCH_SUCCESS:{
+        case GIFF_SEARCH_SUCCESS: {
             const { giffs } = action;
             const { data, pagination } = giffs;
+    
             return {
                 ...state,
-                loading:false,
+                loading: false,
                 giffs:[
                     ...data
                 ],
@@ -121,29 +88,20 @@ export const GiphyReducer  = (state = detfaultState, action) => {
             };
         }
 
-        case GIFF_SEARCH_FAILED: {
-            return {
-                ...state,
-                error:true
-            }
-        }
-
-        case  GIFF_SEARCH_CLEAR: {
+        case  GIFF_SEARCH_CLEAR: 
             return {
                 ...state,
                 error: false,
                 searchText: '',
                 isSearchEnabled: false
             }
-        }
 
-        case THEME_TOGGLE: {
+        case THEME_TOGGLE: 
             return {
                 ...state,
                 selectedTheme: state.selectedTheme === LIGHT ? DARK : LIGHT
             }
-        }
-    
+
         default:
             return state
     }

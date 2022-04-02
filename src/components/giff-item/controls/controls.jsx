@@ -2,8 +2,8 @@ import { bool, func, string } from 'prop-types';
 
 import { PauseIcon } from './pause-icon';
 import { PlayIcon } from './play-icon';
-
 import { ControlsStyled } from './style';
+
 const Controls = props => {
 
     const { paused, playIt, pauseIt } = props;

@@ -1,18 +1,18 @@
-import { getParams, handleErrors } from './../../utils'
 import axios from 'axios';
 
+import { getParams, handleErrors } from './../../utils'
+import { GIPHY_API_URL, GIPHY_API_KEY } from './../../constants';
+
 const httpOptions = {
-    baseURL: 'https://api.giphy.com/v1/gifs',
+    baseURL: GIPHY_API_URL,
     params: {
-        api_key: 'prZLU2797UYYFLpVZcdVQvocUzBkna8p'
+        api_key: GIPHY_API_KEY
     }
 };
 
 const httpInstance = axios.create(httpOptions);
 
 const get = (url, config) => {
-
-    console.log(getParams(config))
     return httpInstance.get(url, getParams(config))
     .then(response => response.data)
     .catch(error => handleErrors(error))

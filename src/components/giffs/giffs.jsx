@@ -1,18 +1,18 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadGiff, loadNextPageGiffs } from './../../store';
-import { GiphyContainerStyled, LoadingNextGiffIndicator } from './styles';
-import { GiffItem } from './../giff-item';
-import { Loader } from './../loader';
-import {GIFF_COUNT} from './../../constants'
+import { loadGiff, loadNextPageGiffs } from '../../store';
+import { GiphyContainerStyled, LoadingNextGiffIndicator, ErrorMessagesStyled } from './styles';
+import { GiffItem } from '../giff-item';
+import { Loader } from '../loader';
+import { GIFF_COUNT } from '../../constants'
 
 const options = {
-    rootMargin:"10px",
-    threshod: 0.8
+    rootMargin: "0px",
+    threshod: 0.10
 };
 
-const Giphy = () => {
+const Giffs = () => {
     const loadingRef = useRef();
     const giffsValueRef = useRef();
 
@@ -21,25 +21,22 @@ const Giphy = () => {
     const giffMetaData = useSelector((state) => state.giffMetaData);
     const searchText = useSelector((state) => state.searchText);
     const loading = useSelector((state) => state.loading);
+    const error = useSelector((state) => state.error);
 
     giffsValueRef.current = {
         giffs,
         giffMetaData
     } 
-    console.log(giffs);
-
 
     useEffect(() => {
         dispatch(loadGiff());
     },[dispatch]);
 
     useEffect(() => {
-        console.log(`GIFFS UOPDATED`);
         window.scrollTo(0, 0);
     },[searchText])
 
     const fetchNextGiffs = useCallback((entries) => {
-        console.log(entries);
         const { current: { giffs, giffMetaData } } = giffsValueRef;
         const { isIntersecting } = entries[0];
         if(isIntersecting && giffs.length){
@@ -70,18 +67,24 @@ const Giphy = () => {
                         giffs.map((giphy,index) => <GiffItem key={giphy.id + giphy.title + index} giff={giphy} />)
                         :
                         (
-                            <div><p>No Giffs Found...</p></div>
+                            <ErrorMessagesStyled error={error}>
+                                <p>No Giffs Found...  :(</p>
+                            </ErrorMessagesStyled>
                         )
                 }
             </GiphyContainerStyled>
-            <LoadingNextGiffIndicator ref={loadingRef}>
-                {/* <p>Loading GIFFs...</p> */}
-                
+            <LoadingNextGiffIndicator ref={loadingRef}>                
                 { loading ? <Loader /> : null }
+                { error ? 
+                    (<ErrorMessagesStyled error={error}>
+                        <p>Error occurred...  :(</p>
+                    </ErrorMessagesStyled>) 
+                    : null
+                }
             </LoadingNextGiffIndicator>
         </>
 
     )
 };
 
-export default Giphy;
+export default Giffs;

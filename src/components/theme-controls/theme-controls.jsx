@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ThemeControlsContainer } from './styles';
 import { THEME } from './../../constants';
 import { DARK_ICON, LIGHT_ICON } from './theme-icons';
-
-import { ThemeControlStyled } from './styles';
+import { ThemeControlsContainer, ThemeControlStyled } from './styles';
 import { toggleTheme } from './../../store';
 import { useTheme } from './../../use-theme';
 

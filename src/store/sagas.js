@@ -1,5 +1,6 @@
 import { call, put, takeLatest, all, fork, select } from 'redux-saga/effects';
 
+import { GIFF_COUNT } from './../constants';
 import { 
     GIFF_FETCH_REQUESTED,
     GIFF_FETCH_SUCCESS,
@@ -17,17 +18,16 @@ import { http } from './../services/http';
 const { get } = http;
 
 const loadingGiffs = (offset = 0) => 
-    get('trending', { params: { offset }});
+    get('trending', { params: { offset, limit: GIFF_COUNT }});
 
 
 const loadGiffForSearchText = (text, offset = 0) => 
-    get('search', { params:{ q: text, offset }})
+    get('search', { params:{ q: text, offset, limit: GIFF_COUNT }})
 
 
 function* loadingTrendingGiffs(){
     try {
         const giffs = yield call(loadingGiffs);
-        console.log(giffs);
         yield put({ type: GIFF_FETCH_SUCCESS , giffs});
     } catch (error) {
         yield put({ type: GIFF_FETCH_FAILED , error});
@@ -41,14 +41,9 @@ function* loadingNextPageGiffs({ payload }){
         const searchTextValue = yield select(searchText);
         let giffs;
         if(isSearchEnabledValue){
-            const fn = () => loadGiffForSearchText(searchTextValue, offset)
-            giffs = yield call(fn);
-            console.log(giffs);   
-
+            giffs = yield call(loadGiffForSearchText, searchTextValue, offset);
         }else{
-            const fn = () => loadingGiffs(offset);
-            giffs = yield call(fn);
-            console.log(giffs);   
+            giffs = yield call(loadingGiffs, offset);
         }
         yield put({ type: GIFF_FETCH_NEXT_PAGE_SUCCESS , giffs});
     } catch (error) {
@@ -59,9 +54,7 @@ function* loadingNextPageGiffs({ payload }){
 function* loadGiffsForSearch({ payload }){
     try {
         const { searchText } = payload;
-        const fn = () => loadGiffForSearchText(searchText)
-        const giffs = yield call(fn);
-        console.log(giffs);
+        const giffs = yield call(loadGiffForSearchText, searchText);
         yield put({ type: GIFF_SEARCH_SUCCESS , giffs});
     } catch (error) {
         yield put({ type: GIFF_SEARCH_FAILED , error});

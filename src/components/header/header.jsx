@@ -1,10 +1,9 @@
-import { LogoStyled, HeaderStyled } from './style';
-
+import { LogoStyled, HeaderStyled } from './styles';
 import { Search } from '../search';
 import { ThemeControls } from '../theme-controls';
 import { useTheme } from '../../use-theme';
 
-const Header = props => {
+const Header = () => {
     const theme = useTheme();
 
     return(
