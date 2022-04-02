@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { store } from './store';
 
 ReactDOM.render(

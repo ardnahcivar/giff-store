@@ -1,6 +1,4 @@
 import { object } from 'prop-types'; 
-import { useState, useCallback } from 'react';
-import { Gif } from '@giphy/react-components'
 import { GiffItemContainer, GiffItemStyled } from './style';
 
 import { useGiffActions } from './use-giff-actions';
@@ -16,7 +14,6 @@ const GiffItem = props => {
     return(
         <GiffItemContainer href="">
             <GiffItemStyled loaded={loaded}>
-                {/* <Gif gif={giff} width={300} /> */}
                 <img src={imgSrc} width={"250px"} onLoad={onLoadHanlder} alt={giff.title} loading={'lazy'}/>
                 <Controls paused={paused} playIt={playIt} pauseIt={pauseIt}/>
             </GiffItemStyled>

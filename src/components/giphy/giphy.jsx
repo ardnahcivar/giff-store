@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadGiff, loadNextPageGiffs } from './../../store';
-import { GiphyContainerStyled, LoadingNextGiffIndicator, Loading } from './styles';
+import { GiphyContainerStyled, LoadingNextGiffIndicator } from './styles';
 import { GiffItem } from './../giff-item';
 import { Loader } from './../loader';
 import {GIFF_COUNT} from './../../constants'
@@ -31,7 +31,7 @@ const Giphy = () => {
 
     useEffect(() => {
         dispatch(loadGiff());
-    },[]);
+    },[dispatch]);
 
     useEffect(() => {
         console.log(`GIFFS UOPDATED`);
@@ -46,7 +46,7 @@ const Giphy = () => {
             const { offset } = giffMetaData;
             dispatch(loadNextPageGiffs({ offset: offset + GIFF_COUNT }));
         }
-    },[]);
+    },[dispatch]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(fetchNextGiffs, options);

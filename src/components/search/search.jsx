@@ -1,7 +1,7 @@
 import { debounce } from 'lodash';
 import { useDispatch } from 'react-redux';
 
-import { SearchContainerStyled, SearchInputStyled, SearchButtonStyled } from './styles';
+import { SearchContainerStyled, SearchInputStyled } from './styles';
 import { loadSearchedGiffs } from './../../store';
 import { SearchIcon } from './search-icon';
 
