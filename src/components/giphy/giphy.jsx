@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadGiff, loadNextPageGiffs } from './../../store';
 import { GiphyContainerStyled, LoadingNextGiffIndicator, Loading } from './styles';
 import { GiffItem } from './../giff-item';
+import { Loader } from './../loader';
+import {GIFF_COUNT} from './../../constants'
 
 const options = {
     rootMargin:"10px",
     threshod: 0.8
 };
 
-const Giphy = props => {
+const Giphy = () => {
     const loadingRef = useRef();
     const giffsValueRef = useRef();
 
@@ -42,7 +44,7 @@ const Giphy = props => {
         const { isIntersecting } = entries[0];
         if(isIntersecting && giffs.length){
             const { offset } = giffMetaData;
-            dispatch(loadNextPageGiffs({ offset: offset + 50 }));
+            dispatch(loadNextPageGiffs({ offset: offset + GIFF_COUNT }));
         }
     },[]);
 
@@ -67,11 +69,15 @@ const Giphy = props => {
                     giffs.length ?
                         giffs.map((giphy,index) => <GiffItem key={giphy.id + giphy.title + index} giff={giphy} />)
                         :
-                        null
+                        (
+                            <div><p>No Giffs Found...</p></div>
+                        )
                 }
             </GiphyContainerStyled>
             <LoadingNextGiffIndicator ref={loadingRef}>
-                <p>Loading GIFFs...</p>
+                {/* <p>Loading GIFFs...</p> */}
+                
+                { loading ? <Loader /> : null }
             </LoadingNextGiffIndicator>
         </>
 

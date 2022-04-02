@@ -5,12 +5,14 @@ export const useGiffActions = () => {
     const [paused, setPaused] = useState(false);
     const [loaded, setLoaded]  = useState(false);
 
-    const playIt = useCallback(() => {
+    const playIt = useCallback((event) => {
         setPaused(false);
+        event.preventDefault();
     },[]);
 
-    const pauseIt = useCallback(() => {
-        setPaused(true)
+    const pauseIt = useCallback((event) => {
+        setPaused(true);
+        event.preventDefault();
     },[]);
 
     const onLoadHanlder = useCallback(() => {

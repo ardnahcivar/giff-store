@@ -1,8 +1,9 @@
 import { debounce } from 'lodash';
 import { useDispatch } from 'react-redux';
 
-import { SearchContainerStyled, SearchInputStyled } from './style';
+import { SearchContainerStyled, SearchInputStyled, SearchButtonStyled } from './styles';
 import { loadSearchedGiffs } from './../../store';
+import { SearchIcon } from './search-icon';
 
 const Search = props => {
     const dispatch = useDispatch();
@@ -27,6 +28,14 @@ const Search = props => {
                 onChange={searchInputDebounced}
                 placeholder="Search all the GIFs"
             />
+                <SearchIcon />
+
+            {/* <SearchButtonStyled
+                type='button'
+            >
+                <SearchIcon />
+            </SearchButtonStyled> */}
+
         </SearchContainerStyled>
     )
 };

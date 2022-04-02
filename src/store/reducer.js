@@ -8,13 +8,19 @@ import {
     GIFF_SEARCH_REQUEST,
     GIFF_SEARCH_SUCCESS,
     GIFF_SEARCH_FAILED,
-    GIFF_SEARCH_CLEAR
+    GIFF_SEARCH_CLEAR,
+    THEME_TOGGLE
 } from './action-types';
+
+import {THEME } from './../constants';
+
+const { LIGHT, DARK } = THEME;
 
 const detfaultState = {
     giffs:[],
     searchText: '',
-    isSearchEnabled: false
+    isSearchEnabled: false,
+    selectedTheme: LIGHT
 }
 
 export const GiphyReducer  = (state = detfaultState, action) => {
@@ -131,6 +137,13 @@ export const GiphyReducer  = (state = detfaultState, action) => {
             }
         }
 
+        case THEME_TOGGLE: {
+            return {
+                ...state,
+                selectedTheme: state.selectedTheme === LIGHT ? DARK : LIGHT
+            }
+        }
+    
         default:
             return state
     }

@@ -1,21 +1,28 @@
 import { Giphy } from './components/giphy';
 
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { store } from './store';
+import {  ThemeProvider } from './theme-provider';
+
 import { Header } from './components/header';
-import { GiffContainer } from './style';
+import { GlobalStyles, AppContainerStyled, GiffContainer } from './style';
+import { themes } from './constants';
+
+const { light } = themes;
 
 function App() {
+  const theme = useSelector(state => state.selectedTheme);
+  
   return (
-    <Provider store={store}>
-      <div className="App">
+    <ThemeProvider theme={ theme || light}>
+      <GlobalStyles />
+      <AppContainerStyled>
         <Header />
         <GiffContainer>
           <Giphy />
         </GiffContainer>
-      </div>
-    </Provider>
+      </AppContainerStyled>
+    </ThemeProvider>
   );
 }
 
