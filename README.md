@@ -2,6 +2,22 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Features 
+ In this project the GIFFs are shown, based on these features  
+    Deployed Project: https://unique-kashata-d4fd64.netlify.app/
+
+    - Trending GIFs
+        - List of trending GIFs are shown on home screen
+    - Search/Filter GIFs
+        - Search for the particular GIFs via Search Input
+    - Infinite Scroll
+        - List of GIFs are shown, and while scrolling new GIFs are appended
+    - Theme Toggler
+        - Change theme light/dark
+    - Play/Pause GIFs
+        - hover over a GIF to play/pause a GIF
+      
+
 ## Available Scripts
 
 In the project directory, you can run:

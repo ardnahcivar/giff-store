@@ -7,6 +7,7 @@ export const GiffItemContainer = styled.a`
     height: fit-content;
     border-radius: 10px;
     overflow: hidden;
+    border: ${({ theme }) => `1px solid ${theme.primary300}`};
 `;
 
 export const GiffItemStyled = styled.div`
