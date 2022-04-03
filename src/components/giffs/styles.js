@@ -26,5 +26,15 @@ export const Loading = styled(LoadingNextGiffIndicator)`
 export const ErrorMessagesStyled = styled.div`
     display: flex;
     font-size: 1.5em;
-    color: ${({ error }) => error ? '#f44336':'#9e9e9e'}
+    color: ${({ error }) => error ? '#f44336':'#9e9e9e'};
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: fit-content;
+    transform: translate(-50%, -50%);
+    background: ${({ theme }) => theme.primary300};
+    box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+    padding: 0 1em;
+    border-radius: 10px;
 `;

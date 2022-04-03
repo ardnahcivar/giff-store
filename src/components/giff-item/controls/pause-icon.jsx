@@ -13,4 +13,4 @@ export const PauseIcon = ({ size = 25 }) => (
             </g>
         </g>
     </svg>
-)
+);

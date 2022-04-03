@@ -1,4 +1,4 @@
-import { LoaderContainer,FirstBlock, SecondBlock, ThirdBlock, FourthBlock, FifthBlock } from './styles';
+import { LoaderContainer, FirstBlock, SecondBlock, ThirdBlock, FourthBlock, FifthBlock } from './styles';
 
 const Loader = () => {
     return(

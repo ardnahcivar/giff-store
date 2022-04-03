@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { giffBgColors } from './../../constants';
+import { giffBgColors } from '../../constants';
 
 export const GiffItemContainer = styled.a`
     width: fit-content;

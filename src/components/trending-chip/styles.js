@@ -1,8 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const TrendingChipStyled = styled.div`
     display: flex;
     justify-content: space-around;
+`;
+
+const bounce = keyframes`
+    0%       { bottom: 1px; }
+    25%, 75% { bottom: 2px; }
+    50%      { bottom: 3px; }
+    100%     { bottom: 0; }
 `;
 
 export const Chip = styled.div`
@@ -15,4 +22,6 @@ export const Chip = styled.div`
     background: #aa00ff;
     color : white;
     cursor: pointer;
+    animation: ${bounce} 1s infinite;
+    position: relative;
 `;

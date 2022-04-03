@@ -2,7 +2,6 @@ import { object, node } from 'prop-types';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import { useThemeProvider } from './use-theme';
-
 import { themes } from './constants';
 
 const { light } = themes;

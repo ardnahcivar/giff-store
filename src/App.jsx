@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { Giffs } from './components/giffs';
+import { Giffs, Header, TrendingChip } from './components';
 import {  ThemeProvider } from './theme-provider';
-import { Header } from './components/header';
 import { GlobalStyles, AppContainerStyled, GiffContainer } from './style';
 import { themes } from './constants';
-import { TrendingChip } from './components/trending-chip';
 
 const { light } = themes;
 
@@ -15,13 +13,13 @@ const App = () => {
   return (
     <ThemeProvider theme={ theme || light}>
       <GlobalStyles />
-      <AppContainerStyled>
-        <Header />
-        <TrendingChip />
-        <GiffContainer>
-          <Giffs />
-        </GiffContainer>
-      </AppContainerStyled>
+        <AppContainerStyled>
+          <Header />
+          <TrendingChip />
+          <GiffContainer>
+            <Giffs />
+          </GiffContainer>
+        </AppContainerStyled>
     </ThemeProvider>
   );
 }

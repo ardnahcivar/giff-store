@@ -7,4 +7,4 @@ export const PlayIcon = ({ size = 25 }) => (
             ></path>
         </g>
     </svg>
-)
+);

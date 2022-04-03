@@ -1,6 +1,6 @@
 import { object } from 'prop-types'; 
 
-import { GiffItemContainer, GiffItemStyled } from './style';
+import { GiffItemContainer, GiffItemStyled } from './styles';
 import { useGiffActions } from './use-giff-actions';
 import { Controls } from './controls';
 

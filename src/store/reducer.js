@@ -24,7 +24,6 @@ const detfaultState = {
 }
 
 export const GiphyReducer  = (state = detfaultState, action) => {
-
    const { payload, type }  = action;
 
    switch(type){
@@ -60,8 +59,7 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                     ...pagination
                 }
             };
-        
-     
+           
         case GIFF_SEARCH_REQUEST: 
             const { searchText } = payload;
 

@@ -1,11 +1,10 @@
-import { bool, func, string } from 'prop-types'; 
+import { bool, func } from 'prop-types'; 
 
 import { PauseIcon } from './pause-icon';
 import { PlayIcon } from './play-icon';
-import { ControlsStyled } from './style';
+import { ControlsStyled } from './styles';
 
 const Controls = props => {
-
     const { paused, playIt, pauseIt } = props;
 
     return(
@@ -23,8 +22,7 @@ const Controls = props => {
 Controls.propTypes = {
     paused: bool,
     playIt: func,
-    pauseIt: func,
-    imgSrc: string
+    pauseIt: func
 };
 
 export default Controls;
