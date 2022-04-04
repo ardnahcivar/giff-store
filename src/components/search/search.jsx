@@ -29,7 +29,7 @@ const Search = () => {
         searchInputDebounced(event);
         setText(searchText);
         event.preventDefault();
-    },[searchInputDebounced]);
+    },[]);
 
     return(
         <SearchContainerStyled>
