@@ -5,7 +5,7 @@ import { GiphyReducer } from './reducer';
 import giffSaga  from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 export const store = createStore(
     GiphyReducer,
     composeEnhancers(
