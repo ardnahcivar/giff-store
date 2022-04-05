@@ -31,7 +31,8 @@ export const GiphyReducer  = (state = detfaultState, action) => {
         case GIFF_FETCH_NEXT_PAGE_REQUEST: 
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: false
             };
         
         case GIFF_FETCH_FAILED: 
@@ -57,7 +58,8 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                 ],
                 giffMetaData:{
                     ...pagination
-                }
+                },
+                error: false
             };
            
         case GIFF_SEARCH_REQUEST: 
@@ -67,7 +69,8 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                 ...state,
                 loading:true,
                 searchText,
-                isSearchEnabled: true
+                isSearchEnabled: true,
+                error: false
             }
 
         case GIFF_SEARCH_SUCCESS: {
@@ -82,7 +85,8 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                 ],
                 giffMetaData:{
                     ...pagination
-                }
+                },
+                error: false
             };
         }
 
