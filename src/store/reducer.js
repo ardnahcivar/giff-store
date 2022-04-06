@@ -100,7 +100,13 @@ export const GiphyReducer  = (state = detfaultState, action) => {
             }
 
         case RESET_GIFF_DATA: 
-            return detfaultState;
+            return {
+                ...state,
+                giffs: [],
+                searchText: '',
+                isSearchEnabled: false,
+                error: false
+            }
 
         case THEME_TOGGLE: 
             return {

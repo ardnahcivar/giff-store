@@ -1,4 +1,4 @@
-export const GIFF_COUNT = 50;
+export const GIFF_COUNT = 25;
 const DARK = 'DARK';
 const LIGHT = 'LIGHT';
 
