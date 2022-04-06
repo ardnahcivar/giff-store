@@ -38,3 +38,10 @@ export const ErrorMessagesStyled = styled.div`
     padding: 0 1em;
     border-radius: 10px;
 `;
+
+export const GiffListComplete = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary500};
+`;

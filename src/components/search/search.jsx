@@ -1,23 +1,36 @@
-import { useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { debounce } from 'lodash';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SearchContainerStyled, SearchInputStyled, SearchIconStyled } from './styles';
-import { loadSearchedGiffs } from './../../store';
+import { loadSearchedGiffs, getSearchText } from './../../store';
 import { SearchIcon } from './search-icon';
 
+const search = (searchValue, dispatch) => {
+    if(searchValue.length > 2){
+        dispatch(loadSearchedGiffs({ searchText: searchValue }))
+    }
+};
+
+const searchInputDebounced = debounce(search, 300);
+
 const Search = () => {
+    const [text, setText] = useState('');
     const dispatch = useDispatch();
+    const searchText = useSelector(getSearchText);
 
-    const search = useCallback((event) => {
-        const searchText = event.target.value;
-        if(searchText.length > 2){
-            dispatch(loadSearchedGiffs({ searchText }))
-        }
-    },[dispatch]);
-
-    const searchInputDebounced = debounce(search, 300);
+    useEffect(() => {
+        setText(searchText);
+    },[searchText])
     
+    useEffect(() => {
+        searchInputDebounced(text, dispatch);
+    },[text, dispatch]);
+
+    const searchInputHandler = (event) => {
+        setText(event.target.value);
+    };
+
     return(
         <SearchContainerStyled>
             <SearchInputStyled
@@ -26,8 +39,9 @@ const Search = () => {
                 autoComplete='off'
                 autoCorrect='off'
                 maxLength={50}
-                onChange={searchInputDebounced}
+                onChange={searchInputHandler}
                 placeholder="Search all the GIFFs"
+                value={text}
             />
             <SearchIconStyled>
                 <SearchIcon />

@@ -26,3 +26,19 @@ export const LogoStyled = styled.span`
     border-radius: 10px;
     display: flex;
 `;
+
+export const TrendingStyled = styled.div`
+    display: flex;
+    width: 140px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    left: 100px;
+    padding: 0.5em;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    :hover {
+        border: 1px solid #9e9e9e;
+    }
+`;

@@ -2,7 +2,7 @@ import { call, put, takeLatest, all, fork, select } from 'redux-saga/effects';
 
 import { GIFF_COUNT } from './../constants';
 import { 
-    GIFF_FETCH_REQUESTED,
+    GIFF_FETCH_REQUEST,
     GIFF_FETCH_SUCCESS,
     GIFF_FETCH_FAILED,
     GIFF_FETCH_NEXT_PAGE_REQUEST,
@@ -12,7 +12,7 @@ import {
     GIFF_SEARCH_SUCCESS,
     GIFF_SEARCH_FAILED
 } from './action-types';
-import { isSearchEnabled, searchText } from './selectors';
+import { getSearchEnabled, getSearchText } from './selectors';
 import { http } from './../services/http';
 
 const { get } = http;
@@ -37,8 +37,8 @@ function* loadingTrendingGiffs(){
 function* loadingNextPageGiffs({ payload }){
     try {
         const { offset } = payload;
-        const isSearchEnabledValue = yield select(isSearchEnabled);
-        const searchTextValue = yield select(searchText);
+        const isSearchEnabledValue = yield select(getSearchEnabled);
+        const searchTextValue = yield select(getSearchText);
         let giffs;
         if(isSearchEnabledValue){
             giffs = yield call(loadGiffForSearchText, searchTextValue, offset);
@@ -62,7 +62,7 @@ function* loadGiffsForSearch({ payload }){
 };
 
 function* giffTrendingSaga(){
-    yield takeLatest(GIFF_FETCH_REQUESTED, loadingTrendingGiffs);
+    yield takeLatest(GIFF_FETCH_REQUEST, loadingTrendingGiffs);
 }
 
 function* giffNextPageSaga(){

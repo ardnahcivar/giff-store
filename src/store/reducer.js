@@ -1,5 +1,5 @@
 import { 
-    GIFF_FETCH_REQUESTED,
+    GIFF_FETCH_REQUEST,
     GIFF_FETCH_SUCCESS,
     GIFF_FETCH_FAILED,
     GIFF_FETCH_NEXT_PAGE_REQUEST,
@@ -9,9 +9,10 @@ import {
     GIFF_SEARCH_SUCCESS,
     GIFF_SEARCH_FAILED,
     GIFF_SEARCH_CLEAR,
-    THEME_TOGGLE
+    THEME_TOGGLE,
+    RESET_GIFF_DATA
 } from './action-types';
-import {THEME } from './../constants';
+import { THEME } from './../constants';
 
 const { LIGHT, DARK } = THEME;
 
@@ -27,7 +28,7 @@ export const GiphyReducer  = (state = detfaultState, action) => {
    const { payload, type }  = action;
 
    switch(type){
-        case GIFF_FETCH_REQUESTED:
+        case GIFF_FETCH_REQUEST:
         case GIFF_FETCH_NEXT_PAGE_REQUEST: 
             return {
                 ...state,
@@ -97,6 +98,9 @@ export const GiphyReducer  = (state = detfaultState, action) => {
                 searchText: '',
                 isSearchEnabled: false
             }
+
+        case RESET_GIFF_DATA: 
+            return detfaultState;
 
         case THEME_TOGGLE: 
             return {

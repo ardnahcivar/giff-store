@@ -1,5 +1,18 @@
 import styled, { keyframes } from 'styled-components';
 
+export const LoadingNextGiffIndicator = styled.div`
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    justify-content: center;
+    min-height: 20px;
+    height: 200px;
+`;
+
+export const Loading = styled(LoadingNextGiffIndicator)`
+    padding: 0.5em;
+`;
+
 const strech = keyframes`
     0%, 40%, 100% { transform: scaleY(0.4); };
     20% { transform: scaleY(1.0); };

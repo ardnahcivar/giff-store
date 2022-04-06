@@ -1,43 +1,45 @@
-import { GiphyContainerStyled, LoadingNextGiffIndicator, ErrorMessagesStyled } from './styles';
-import { GiffItem } from '../giff-item';
+import { GiphyContainerStyled, LoadingNextGiffIndicator, ErrorMessagesStyled, GiffListComplete } from './styles';
 import { Loader } from '../loader';
 import { useGiffs } from './use-giffs';
 import { useTheme } from './../../use-theme';
-import { NO_GIFFS_FOUND_MSG, ERROR_MSG } from './../../constants';
+import { ERROR_MSG, GIFFS_NOT_AVAILABLE } from './../../constants';
+import { GiffList } from './giff-list';
 
 const Giffs = () => {
     const theme = useTheme();
-    const [giffs, loading, loadingRef, error] = useGiffs();
+    const [giffs, loading, loadingRef, error, giffListComplete ] = useGiffs();
 
     return (
         <>
             <GiphyContainerStyled>
-                {
-                    giffs.length ?
-                        giffs.map((giphy,index) => <GiffItem key={giphy.id + giphy.title + index} giff={giphy} />)
-                        :
-                        (
-                            loading ? 
-                            null
-                            : (
-                                <ErrorMessagesStyled theme={theme} error={error}>
-                                    <p>{NO_GIFFS_FOUND_MSG}</p>    
-                                </ErrorMessagesStyled>
-                            )
-                        )
-                }
+                <GiffList  
+                    giffs={giffs}
+                    error={error}
+                    loading={loading}
+                />
             </GiphyContainerStyled>
-            <LoadingNextGiffIndicator ref={loadingRef}>                
-                { loading ? <Loader /> : null }
-                { error ? 
+
+            {
+                !giffListComplete ?
+                    (<LoadingNextGiffIndicator ref={loadingRef}>                
+                        <Loader />
+                    </LoadingNextGiffIndicator>)
+                    : null
+            }
+            { error ? 
                     (<ErrorMessagesStyled theme={theme} error={error}>
                         <p>{ERROR_MSG}</p>
                     </ErrorMessagesStyled>) 
-                    : null
-                }
-            </LoadingNextGiffIndicator>
+                : null
+            }
+            {
+                giffListComplete && giffs.length ?
+                    <GiffListComplete theme={theme}>
+                        <p>{GIFFS_NOT_AVAILABLE}</p>
+                    </GiffListComplete>
+                : null
+            }
         </>
-
     )
 };
 

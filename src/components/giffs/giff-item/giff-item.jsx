@@ -3,7 +3,7 @@ import { object } from 'prop-types';
 import { GiffItemContainer, GiffItemStyled } from './styles';
 import { useGiffActions } from './use-giff-actions';
 import { Controls } from './controls';
-import { useTheme } from './../../use-theme';
+import { useTheme } from './../../../use-theme';
 
 const GiffItem = props => {
     const theme= useTheme();

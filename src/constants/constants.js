@@ -9,3 +9,5 @@ export const THEME = {
 
 export const NO_GIFFS_FOUND_MSG = 'No Giffs Found...  :(';
 export const ERROR_MSG = 'Error occurred please refresh';
+export const GIFFS_NOT_AVAILABLE = 'Giffs not available...';
+export const TRENDING_TEXT = 'Show Trending';

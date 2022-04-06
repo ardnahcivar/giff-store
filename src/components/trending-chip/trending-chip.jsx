@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from './../../use-theme';
@@ -12,11 +13,11 @@ const TrendingChip = () => {
 
     const showChip = !loading && giffs.length === 0;
 
-    const showTrendingGiffs = (event) => {
+    const showTrendingGiffs = useCallback((event) => {
         dispatch(clearSearch());
         dispatch(loadGiff());
         event.preventDefault();
-    };
+    },[dispatch]);
 
     return(
         <TrendingChipStyled theme={theme}>

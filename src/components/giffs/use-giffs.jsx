@@ -1,22 +1,29 @@
 import { useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadGiff, loadNextPageGiffs } from '../../store';
-import { GIFF_COUNT } from '../../constants'
+import { 
+    loadGiff,
+    loadNextPageGiffs,
+    getGiffs,
+    getGiffMetaData,
+    getSearchText,
+    getLoading,
+    getError
+} from '../../store';
+import { GIFF_COUNT } from '../../constants';
 
 const options = {
-    rootMargin: "0px",
-    threshod: 0.10
+    threshod: [0, 0.10]
 };
 
 export const useGiffs = () => {
     const loadingRef = useRef();
     const dispatch = useDispatch();
-    const giffs = useSelector((state) => state.giffs);
-    const giffMetaData = useSelector((state) => state.giffMetaData);
-    const searchText = useSelector((state) => state.searchText);
-    const loading = useSelector((state) => state.loading);
-    const error = useSelector((state) => state.error);
+    const giffs = useSelector(getGiffs);
+    const giffMetaData = useSelector(getGiffMetaData);
+    const searchText = useSelector(getSearchText);
+    const loading = useSelector(getLoading);
+    const error = useSelector(getError);
 
     useEffect(() => {
         dispatch(loadGiff());
@@ -48,6 +55,8 @@ export const useGiffs = () => {
         }
     },[fetchNextGiffs]);
 
+    const { total_count  } = giffMetaData || {};
+    const giffListComplete = total_count === giffs.length;
 
-    return [giffs, loading, loadingRef, error];
+    return [giffs, loading, loadingRef, error, giffListComplete];
 };
