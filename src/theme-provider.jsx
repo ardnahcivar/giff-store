@@ -2,11 +2,11 @@ import { object, node } from 'prop-types';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import { useThemeProvider } from './use-theme';
-import { themes } from './constants';
+import { THEME } from './constants';
 
-const { light } = themes;
+const { LIGHT } = THEME;
 
-export const ThemeProvider = ({ theme = light, children }) => {
+export const ThemeProvider = ({ theme = LIGHT, children }) => {
     const themeValue = useThemeProvider({ theme });
 
     return <StyledThemeProvider theme={themeValue}>{children}</StyledThemeProvider>

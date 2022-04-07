@@ -13,5 +13,5 @@ export const handleErrors = error => {
     }
 
     const errorMessage = `api call failed`
-    return Promise.rejecct(error.message || errorMessage);
+    return Promise.reject(error.message || errorMessage);
 }
